@@ -34,7 +34,7 @@ python MediapipePython.py
 
 ## :milky_way:Reference
 <a href="https://developers.google.com/mediapipe">https://developers.google.com/mediapipe</a>
-<br>
+<br/>
 <a href="https://unity.com/kr">https://unity.com/kr</a>
-<br>
+<br/>
 <a href="https://www.computervision.zone/courses/3d-hand-tracking/">https://www.computervision.zone/courses/3d-hand-tracking/</a>
