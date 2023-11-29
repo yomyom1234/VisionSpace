@@ -23,7 +23,7 @@
 git clone https://github.com/yomyom1234/VisionSpace visionspace
 ```
 2. unity hub 실행
-3. mepiapipe 실행
+3. mediapipe 실행
 ```
 cd visionspace/Asset/Script
 python MediapipePython.py
