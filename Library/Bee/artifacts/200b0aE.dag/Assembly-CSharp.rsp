@@ -356,7 +356,7 @@
 -analyzer:"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Record_player/Scripts/RecordPlayer.cs"
 "Assets/Scripts/cursor.cs"
-"Assets/Scripts/Disk1.cs"
+"Assets/Scripts/Disk.cs"
 "Assets/Scripts/Disk2.cs"
 "Assets/Scripts/MediapipeHandsReceiver.cs"
 "Assets/Scripts/ScreenToWorldPoint.cs"

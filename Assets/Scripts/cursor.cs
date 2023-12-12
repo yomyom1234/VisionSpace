@@ -5,9 +5,10 @@ using UnityEngine;
 public class cursor : MonoBehaviour
 {
     MediapipeHandsReceiver K;
-    Disk1 disk1;
-    Disk2 disk2;
-    int timer;
+	public Disk disk_1;
+	public Disk disk_2;
+	public Disk disk_3;
+
     public int music;
 	public int hold;
 
@@ -15,54 +16,59 @@ public class cursor : MonoBehaviour
     void Start()
     {
         K = GameObject.Find("MediapipeHandsReceiver").GetComponent<MediapipeHandsReceiver>();
-        disk1 = GameObject.Find("Disk1").GetComponent<Disk1>();
-        disk2 = GameObject.Find("Disk2").GetComponent<Disk2>();
-        timer = 0;
         music = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float distance_disk1;
-        float distance_disk2;
+		float distance_disk_1;
+		float distance_disk_2;
+		float distance_disk_3;
         transform.position = new Vector3(K.hand[0].x, 3f, K.hand[0].y);
 
-        distance_disk1 = distance2(disk1.transform.position, transform.position);
-		distance_disk2 = distance2(disk2.transform.position, transform.position);
+		distance_disk_1 = distance2(disk_1.transform.position, transform.position);
+		distance_disk_2 = distance2(disk_2.transform.position, transform.position);
+		distance_disk_3 = distance2(disk_3.transform.position, transform.position);
         if (Hold() == 1)
         {
-            //timer++;
-            //if (timer < 650)
-            //{
-            //    timer++;
-            //    //Change Color
-            //}
-            if (distance_disk1 < 0.3)
+            if (distance_disk_1 < 0.3)
             {
-                disk1.transform.position = new Vector3(transform.position.x, (float)0.8, transform.position.z);
-                disk1.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                if (IsInTable_1(disk1) == 1)
+                disk_1.transform.position = new Vector3(transform.position.x, (float)0.8, transform.position.z);
+                disk_1.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                if (IsInTable(disk_1) == 1)
                 {
-                    disk1.transform.position = new Vector3(0, (float)0.4, 0);
-                    music = 1;
+                    disk_1.transform.position = new Vector3(0, (float)0.4, 0);
+                    disk_1.music = 1;
                 }
             }
-            else if (distance_disk2 < 0.3)
+            else if (distance_disk_2 < 0.3)
             {
-                disk2.transform.position = new Vector3(transform.position.x, (float)0.8, transform.position.z);
-                disk2.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                if (IsInTable_2(disk2) == 1)
+                disk_2.transform.position = new Vector3(transform.position.x, (float)0.8, transform.position.z);
+                disk_2.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                if (IsInTable(disk_2) == 1)
                 {
-                    disk2.transform.position = new Vector3(0, (float)0.4, 0);
-                    music = 2;
+                    disk_2.transform.position = new Vector3(0, (float)0.4, 0);
+                    disk_2.music = 1;
                 }
             }
-            if (IsInTable_1(disk1) != 1 && IsInTable_2(disk2) != 1)
-                music = 0;
+            else if (distance_disk_3 < 0.3)
+            {
+                disk_3.transform.position = new Vector3(transform.position.x, (float)0.8, transform.position.z);
+                disk_3.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                if (IsInTable(disk_3) == 1)
+                {
+                    disk_3.transform.position = new Vector3(0, (float)0.4, 0);
+                    disk_3.music = 1;
+                }
+            }
+            if (IsInTable(disk_1) != 1 && IsInTable(disk_2) != 1 && IsInTable(disk_3) != 1)
+			{
+				disk_1.music = 0;
+				disk_2.music = 0;
+				disk_3.music = 0;
+			}
         }
-        else
-            timer = 0;
     }
 
     float distance2(Vector3 a, Vector3 b)
@@ -75,21 +81,11 @@ public class cursor : MonoBehaviour
         return ((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y) + (a.z - b.z) * (a.z - b.z));
     }
 
-    int IsInTable_1(Disk1 disk1)
+    int IsInTable(Disk disk)
     {
-        if (disk1.transform.position.x >= -0.2 && disk1.transform.position.x <= 0.1)
+        if (disk.transform.position.x >= -0.2 && disk.transform.position.x <= 0.1)
             {
-                if (disk1.transform.position.z >= -0.2 && disk1.transform.position.z <= 0.02)
-                    return (1);
-            }
-        return (0);
-    }
-
-    int IsInTable_2(Disk2 disk2)
-    {
-        if (disk2.transform.position.x >= -0.2 && disk2.transform.position.x <= 0.1)
-            {
-                if (disk2.transform.position.z >= -0.2 && disk2.transform.position.z <= 0.02)
+                if (disk.transform.position.z >= -0.2 && disk.transform.position.z <= 0.02)
                     return (1);
             }
         return (0);
